@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  my-go-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: lambda  # Cambiar a "builder" para producción
+    image: lambda-api
+    container_name: lambda-container_name
+    ports:
+      - "4000:8080"  # Mapea el puerto para acceso externo
+    volumes:
+      - .:/app
+    # environment:
+    #   - MODE=LOCAL
