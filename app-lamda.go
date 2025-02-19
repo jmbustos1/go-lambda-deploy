@@ -1,6 +1,16 @@
 package main
 
+// ====LEVANTAR===
+// terraform apply -target=module.ecr -auto-approve
+// ./initial_image_deploy.sh
+// terraform apply
+
+// ====Destruir===
+// aws ecr list-images --repository-name my-lambda-app --query 'imageIds[*]' --output json | jq -c '.[]' | while read img; do     aws ecr batch-delete-image --repository-name my-lambda-app --image-ids "$img"; done
+// terraform destroy
+
 // curl -X POST "http://localhost:4000/2015-03-31/functions/function/invocations"      -d '{"httpMethod":"GET","path":"/","body":""}'
+// curl -X POST "$(terraform -chdir=terraform output -raw api_gateway_url)/"      -H "Content-Type: application/json"      -d '{"message":"Hola desde Terraform"}'
 import (
 	"context"
 	"fmt"
